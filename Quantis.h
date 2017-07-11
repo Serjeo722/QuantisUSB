@@ -3,9 +3,6 @@
 
 #define QUANTIS_VID 0x0ABA
 #define QUANTIS_PID 0x0102
-#define QUANTIS_MAXPKTSIZE 1024
-
-#define EP_INTERVAL 0x1
 
 #define EP_MAXPKTSIZE 64
 
@@ -13,7 +10,7 @@
 #define QUANTIS_CONTROL_PIPE_ADDR 0x00
 
 #define QUANTIS_INPUT_PIPE   1
-#define QUANTIS_INPUT_PIPE_ADDR   0x6
+#define QUANTIS_INPUT_PIPE_ADDR   0x6 //!!!
 
 #define QUANTIS_PIPES_COUNT  2  // 0 - control pipe, 1 - input pipe
 
@@ -41,13 +38,6 @@ public:
          * @return 0 on success.
          */
 		uint8_t Release();
-        
-		/**
-         * Poll the USB Input endpoins and run the state machines.
-         * @return 0 on success.
-         */
-        
-		//uint8_t Poll();
 
         /**
          * Get the device address.
