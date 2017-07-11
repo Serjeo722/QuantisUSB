@@ -1,7 +1,7 @@
 {
-  "name": "USB-Host-Shield-20",
-  "keywords": "Quantis, Quantis USB, ID Quantique, IDQ, random number generator, TRNG, driver, arduino, teensy",
-  "description": "Quantis USB Library",
+  "name": "Quantis USB",
+  "keywords": "Quantis, Quantis USB, ID Quantique, IDQ, true random number generator, TRNG, driver, arduino, teensy",
+  "description": "Quantis USB",
   "authors":
   [
     {

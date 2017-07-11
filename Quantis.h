@@ -8,7 +8,6 @@
 #define EP_INTERVAL 0x1
 
 #define EP_MAXPKTSIZE 64
-#define EP_INPUT_BUFFER_SIZE 512
 
 #define QUANTIS_CONTROL_PIPE 0
 #define QUANTIS_CONTROL_PIPE_ADDR 0x00
@@ -16,7 +15,7 @@
 #define QUANTIS_INPUT_PIPE   1
 #define QUANTIS_INPUT_PIPE_ADDR   0x6
 
-#define QUANTIS_PIPES_COUNT  2
+#define QUANTIS_PIPES_COUNT  2  // 0 - control pipe, 1 - input pipe
 
 #include "Usb.h"
 
@@ -48,7 +47,7 @@ public:
          * @return 0 on success.
          */
         
-		uint8_t Poll();
+		//uint8_t Poll();
 
         /**
          * Get the device address.
@@ -75,18 +74,17 @@ public:
         virtual bool VIDPIDOK(uint16_t vid, uint16_t pid) {
                 return ((vid == QUANTIS_VID) && (pid == QUANTIS_PID));
         };
-        /**@}*/
 
-    
+		/**
+         * get bytes from Quantis USB device and put them to buffer
+         */
+		int32_t getTRNGBytes(uint16_t bufferSize, uint8_t* buffer);
+		
         /**
          * Used to disconnect any of the controllers.
          * @param controller The controller to disconnect. Default to 0.
          */
         void disconnect(uint8_t controller = 0);
-		
-		/** True if a wireless receiver is connected. */
-		bool connected;
-		
 		
 protected:
 		/** Pointer to USB class instance. */
@@ -99,11 +97,7 @@ protected:
 private:
 		void readReport(uint8_t controller);
         void printReport(uint8_t controller, uint8_t nBytes);
-		uint8_t getstrdescr( uint8_t addr, uint8_t idx );
-		
+		uint8_t getstrdescr(uint8_t addr,uint8_t idx);
 		bool bPollEnable;
-		uint8_t readBuf[EP_INPUT_BUFFER_SIZE];
-		uint32_t checkStatusTimer;
-		uint8_t state[1];
 };
 #endif
