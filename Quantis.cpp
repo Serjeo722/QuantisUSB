@@ -234,7 +234,7 @@ uint8_t QUANTIS::Init(uint8_t parent, uint8_t port, bool lowspeed) {
 									else
 									{
 										#ifdef DEBUG_USB_HOST
-										Notify(PSTR("\r\nQuantis USB Connected"), 0x80);
+										Notify(PSTR("\r\nQuantis USB Connected\r\n"), 0x80);
 										#endif
 
 										bPollEnable = true;                  // ready to use input pipe

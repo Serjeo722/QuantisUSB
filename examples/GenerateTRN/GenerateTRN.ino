@@ -7,7 +7,6 @@
 
 #include <Quantis.h>
 
-#define BUFFER_SIZE 512
 #define PRINT_NUMBER_OF_BYTES_TO_ONE_LINE 32
 
 USB     Usb;
@@ -16,16 +15,23 @@ USBHub  Hub2(&Usb);
 USBHub  Hub3(&Usb);
 USBHub  Hub4(&Usb);
 
-QUANTIS Quantis1(&Usb);
-QUANTIS Quantis2(&Usb);
+#define MAXIMUM_SUPPORTED_GENERATORS 4
+QUANTIS Generators[] =
+{
+	QUANTIS(&Usb),
+	QUANTIS(&Usb),
+	QUANTIS(&Usb),
+	QUANTIS(&Usb)
+};
 
+#define BUFFER_SIZE (3 * 64)
 uint8_t TRNG_ReadBuffer[BUFFER_SIZE];
 
 void printCurrentBuffer(uint16_t limit){
-	for(uint8_t row=0; row < BUFFER_SIZE / PRINT_NUMBER_OF_BYTES_TO_ONE_LINE; row++)
+	for(uint8_t row=0; row * PRINT_NUMBER_OF_BYTES_TO_ONE_LINE < limit; row++)
 	{
 		Notify(PSTR("\r\n"), 0x80);
-		for(uint8_t column=0; column <PRINT_NUMBER_OF_BYTES_TO_ONE_LINE; column ++)
+		for(uint8_t column=0; column < PRINT_NUMBER_OF_BYTES_TO_ONE_LINE; column++)
 		{
 			if(row * PRINT_NUMBER_OF_BYTES_TO_ONE_LINE + column < limit)
 			{
@@ -55,25 +61,34 @@ void setup()
 
 void loop()
 {
-	Usb.Task();
-
-	if(Quantis1.isReady())
+	for (int i=0;i<10;i++)
 	{
-		int32_t receivedBytes = Quantis1.getTRNGBytes(sizeof(TRNG_ReadBuffer), TRNG_ReadBuffer);
-		if (receivedBytes > 0)
-		{
-			printCurrentBuffer(receivedBytes);
-		}
+		delay(100);
+		Usb.Task();
 	}
 
-	if(Quantis2.isReady())
+	for(int i=0;i<MAXIMUM_SUPPORTED_GENERATORS;i++)
 	{
-		int32_t receivedBytes = Quantis2.getTRNGBytes(sizeof(TRNG_ReadBuffer), TRNG_ReadBuffer);
-		if (receivedBytes > 0)
+
+		Serial.print("Slot:");
+		Serial.print(i);
+
+		if(Generators[i].isReady())
 		{
-			printCurrentBuffer(receivedBytes);
+			int32_t receivedBytes = Generators[i].getTRNGBytes(sizeof(TRNG_ReadBuffer), TRNG_ReadBuffer);
+			if (receivedBytes > 0)
+			{
+				Serial.print(" recieved bytes:");
+				Serial.print(receivedBytes);
+
+				printCurrentBuffer(receivedBytes);
+			}
+		} 
+		else 
+		{
+			Serial.println(" NOT CONNECTED");
 		}
 	}
 	
-	delay(2000);
+	Serial.println();
 }
