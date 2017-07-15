@@ -17,11 +17,21 @@ It is first one adapter that I see in the store, so you can use any other one, i
 (If you are using mini shield version with 3.3 volts and USB Hub with external power, you have to screen power contact from USB Hub. I'm using just adhansive tape on USB connector to screen [pin 1](https://commons.wikimedia.org/wiki/File:USB.svg), you can unsolder it or use [5V mini shield modification](https://www.circuitsathome.com/usb-host-shield-hardware-manual/)).
 
 4. TRN Generator: [Quantis USB](http://www.idquantique.com/random-number-generation/quantis-random-number-generator/)<br>
-Driver has VID & PID values in Quantis.h file, so if you need to use another generator, just change it to required values. Also another generator could have another UANTIS_INPUT_PIPE_ADDR, so you also have to change it.
+Driver has VID & PID values in [Quantis.h](https://github.com/Serjeo722/QuantisUSB/blob/master/Quantis.h) file, so if you need to use another generator, just change it to required values. Also another generator could have another UANTIS_INPUT_PIPE_ADDR, so you also have to change it.
 
 # Software
 5. [Arduino IDE](https://www.arduino.cc/en/main/software) v1.6.9 or higher<br> 
 6. [Teensyduino driver](https://www.pjrc.com/teensy/td_download.html)
 7. [USB Host Shield Library](https://github.com/felis/USB_Host_Shield_2.0) v2.0
 
-# Results
+# Examples
+
+[GenerateTRN.ino](https://github.com/Serjeo722/QuantisUSB/blob/master/examples/GenerateTRN/GenerateTRN.ino)<br>
+Waits till device will be connected, shows it parameters (name,serial...), obtains every second new 192 bytes block from Quantis USB and shows it on the screen.
+![alt tag](https://github.com/Serjeo722/QuantisUSB/blob/master/examples/GenerateTRN/ScreenShot.png?raw=true)
+
+
+[MeasureTRNGSpeed.ino](https://github.com/Serjeo722/QuantisUSB/blob/master/examples/MeasureTRNGSpeed/MeasureTRNGSpeed.ino)<br>
+Waits available QuantisUSB devices and every second count how many bytes has been received from them.
+![alt tag](https://github.com/Serjeo722/QuantisUSB/blob/master/examples/MeasureTRNGSpeed/ScreenShot.png?raw=true)
+
