@@ -1,11 +1,11 @@
 {
   "name": "Quantis USB",
   "keywords": "Quantis, Quantis USB, ID Quantique, IDQ, true random number generator, TRNG, driver, arduino, teensy",
-  "description": "Quantis USB",
+  "description": "Quantis USB Driver for Arduino-like boards",
   "authors":
   [
     {
-      "name": "Sergey V. Muhin",
+      "name": "Sergey V. Mukhin",
       "email": "7221798@gmail.com",
       "maintainer": true
     }
