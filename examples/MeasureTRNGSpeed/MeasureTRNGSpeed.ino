@@ -69,7 +69,7 @@ void loop()
 		
 		Serial.print("devices connected: ");
 		Serial.print(connectedDevices);
-		Serial.print(" recieved bytes: ");
+		Serial.print(" received bytes: ");
 		Serial.println(receivedBytes);
 		
 		receivedBytes = 0;
