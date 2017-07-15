@@ -78,7 +78,7 @@ void loop()
 			int32_t receivedBytes = Generators[i].getTRNGBytes(sizeof(TRNG_ReadBuffer), TRNG_ReadBuffer);
 			if (receivedBytes > 0)
 			{
-				Serial.print(" recieved bytes:");
+				Serial.print(" received bytes:");
 				Serial.print(receivedBytes);
 
 				printCurrentBuffer(receivedBytes);
