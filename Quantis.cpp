@@ -1,7 +1,6 @@
 #include "Quantis.h"
 
 #define EXTRADEBUG
-#define PRINTREPORT
 
 QUANTIS::QUANTIS(USB *p) :
 pUsb(p),            // pointer to USB class instance - mandatory
@@ -204,14 +203,13 @@ uint8_t QUANTIS::Init(uint8_t parent, uint8_t port, bool lowspeed) {
 							}
 							else
 							{
-								epInfo[QUANTIS_CONTROL_PIPE].epAddr    = 0; 
+								epInfo[QUANTIS_CONTROL_PIPE].epAddr    = QUANTIS_CONTROL_PIPE_ADDR; 
 								epInfo[QUANTIS_CONTROL_PIPE].epAttribs = USB_TRANSFER_TYPE_CONTROL;
 
-								epInfo[QUANTIS_INPUT_PIPE].epAddr      = QUANTIS_INPUT_PIPE_ADDR; //!!! 
+								epInfo[QUANTIS_INPUT_PIPE].epAddr      = QUANTIS_INPUT_PIPE_ADDR; 
 								epInfo[QUANTIS_INPUT_PIPE].epAttribs   = USB_TRANSFER_TYPE_BULK;
-								epInfo[QUANTIS_INPUT_PIPE].bmSndToggle = bmSNDTOG0; //!!!
-								epInfo[QUANTIS_INPUT_PIPE].bmRcvToggle = bmRCVTOG0; //!!!
-								//epInfo[QUANTIS_INPUT_PIPE].maxPktSize  = udd->bMaxPacketSize0;  //!!!!     // Extract Max Packet Size from device descriptor
+								epInfo[QUANTIS_INPUT_PIPE].bmRcvToggle = 0;
+								epInfo[QUANTIS_INPUT_PIPE].maxPktSize  = udd->bMaxPacketSize0;
 
 								rcode = pUsb->setEpInfoEntry(bAddress, QUANTIS_PIPES_COUNT, epInfo);
 								if(rcode)

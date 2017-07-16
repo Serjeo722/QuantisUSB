@@ -27,7 +27,8 @@ QUANTIS Generators[] =
 #define BUFFER_SIZE (3 * 64)
 uint8_t TRNG_ReadBuffer[BUFFER_SIZE];
 
-void printCurrentBuffer(uint16_t limit){
+void printCurrentBuffer(uint16_t limit)
+{
 	for(uint8_t row=0; row * PRINT_NUMBER_OF_BYTES_TO_ONE_LINE < limit; row++)
 	{
 		Notify(PSTR("\r\n"), 0x80);
