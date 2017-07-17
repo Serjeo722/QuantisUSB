@@ -23,6 +23,8 @@ bPollEnable(false)  // don't start polling before dongle is connected
 	}
 }
 
+// ??? do we need this function in this driver?
+// may be take it out to client code side, or ask USB host library developers to addit to their library.
 uint8_t QUANTIS::getstrdescr( uint8_t addr, uint8_t idx )
 {
 	uint8_t buf[ 256 ];
@@ -166,6 +168,7 @@ uint8_t QUANTIS::Init(uint8_t parent, uint8_t port, bool lowspeed) {
 
 						if(!bAddress)
 						{
+							// Release()?
 							return exception(USB_ERROR_OUT_OF_ADDRESS_SPACE_IN_POOL);
 						} 
 						else
@@ -182,7 +185,7 @@ uint8_t QUANTIS::Init(uint8_t parent, uint8_t port, bool lowspeed) {
 								D_PrintHex<uint8_t > (rcode, 0x80);
 								#endif
 								return rcode;
-							}
+							} // ? else {...}
 
 							#ifdef EXTRADEBUG
 							Notify(PSTR("\r\nAddr: "), 0x80);
@@ -196,6 +199,8 @@ uint8_t QUANTIS::Init(uint8_t parent, uint8_t port, bool lowspeed) {
 							rcode = pUsb->setEpInfoEntry(bAddress, 1, epInfo); // Assign epInfo to epinfo pointer - only EP0 is known
 							if(rcode)
 							{
+								// Release()???
+								
 								#ifdef DEBUG_USB_HOST
 								NotifyFailSetDevTblEntry();
 								#endif
@@ -214,6 +219,8 @@ uint8_t QUANTIS::Init(uint8_t parent, uint8_t port, bool lowspeed) {
 								rcode = pUsb->setEpInfoEntry(bAddress, QUANTIS_PIPES_COUNT, epInfo);
 								if(rcode)
 								{
+									// Release()?
+									
 									#ifdef DEBUG_USB_HOST
 									NotifyFailSetDevTblEntry();
 									#endif
@@ -224,6 +231,7 @@ uint8_t QUANTIS::Init(uint8_t parent, uint8_t port, bool lowspeed) {
 									rcode = pUsb->setConf(bAddress, epInfo[QUANTIS_CONTROL_PIPE].epAddr, 1);
 									if(rcode)
 									{
+										// Release()?
 										#ifdef DEBUG_USB_HOST
 										NotifyFailSetConfDescr();
 										#endif
