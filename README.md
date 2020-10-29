@@ -14,7 +14,7 @@ b. has entangled pinout (see my [post](https://forum.pjrc.com/threads/43357-Teen
 
 3. USB Hub: [DEXP BT7-01](http://www.dns-shop.ru/product/76ec67e92f783361/usb-razvetvitel-dexp-bt7-01/)<br>
 You can use any other one, it just dependes on that how much devices you want to connect to one USB Host and does it provide required power for it.<br>
-(If you are using mini shield version with 3.3 volts and USB Hub with external power, you have to screen power contact from USB Hub. I'm using just adhansive tape on USB connector to screen [pin 1](https://commons.wikimedia.org/wiki/File:USB.svg), you can unsolder it or use [5V mini shield modification](https://www.circuitsathome.com/usb-host-shield-hardware-manual/)).
+(If you are using mini shield version with 3.3 volts and USB Hub with external power, you have to screen power contact from USB Hub. I'm using just adhesive tape on USB connector to screen [pin 1](https://commons.wikimedia.org/wiki/File:USB.svg), you can unsolder it or use [5V mini shield modification](https://www.circuitsathome.com/usb-host-shield-hardware-manual/)).
 
 4. TRN Generator: [Quantis USB](http://www.idquantique.com/random-number-generation/quantis-random-number-generator/)<br>
 Driver has VID & PID values in [Quantis.h](https://github.com/Serjeo722/QuantisUSB/blob/master/Quantis.h) file, so if you need to use another generator, just change it to required values. Also, another generator could have another QUANTIS_INPUT_PIPE_ADDR, so you also have to change it.
